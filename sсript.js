@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Елементи для динамічного оновлення
     const container = document.querySelector('.container');
-    const itemRows = container.querySelectorAll('.item-row:not(.header-row)');
+    const itemRowsContainer = document.querySelector('.cart-items');
+    
+    // Елементи управління фільтром
+    const searchInput = document.getElementById('search-input');
+    const categoryFilter = document.getElementById('category-filter');
+    
+    // Елементи для розрахунків
     const subtotalDisplay = document.querySelector('.cart-summary .item-row:nth-child(1) .item-total');
     const discountDisplay = document.querySelector('.cart-summary .item-row:nth-child(2) .item-total');
     const deliveryDisplay = document.querySelector('.cart-summary .item-row:nth-child(3) .item-total');
@@ -21,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * @returns {number} - Числове значення ціни
      */
     const parsePrice = (text) => {
-        return parseInt(text.replace('грн.', '').replace('.', '').trim());
+        return parseInt(text.replace('грн.', '').replace(/\s/g, '').replace('.', '').trim());
     };
 
     /**
@@ -30,8 +36,43 @@ document.addEventListener('DOMContentLoaded', () => {
      * @returns {string} - Форматований рядок
      */
     const formatPrice = (price) => {
-        return `${price.toLocaleString('uk-UA')} грн.`;
+        // Використовуємо toLocaleString для додавання пробілів як роздільник тисяч
+        return `${price.toLocaleString('uk-UA').replace(',', ' ')} грн.`;
     };
+
+    /**
+     * 🔎 Фільтрує та відображає/приховує товари на основі пошуку та фільтру.
+     */
+    const applyFilters = () => {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const selectedCategory = categoryFilter.value;
+        
+        // Оновлюємо список рядків товарів після можливого видалення
+        const currentItemRows = itemRowsContainer.querySelectorAll('.item-row:not(.header-row)');
+
+        currentItemRows.forEach(row => {
+            const title = row.querySelector('h4').textContent.toLowerCase();
+            const category = row.dataset.category; // Отримуємо категорію з data-category="x"
+
+            // Логіка пошуку
+            const matchesSearch = title.includes(searchText);
+
+            // Логіка фільтрації за категорією
+            const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+
+            // Відображаємо рядок, якщо він відповідає обом критеріям
+            if (matchesSearch && matchesCategory) {
+                row.style.display = 'flex';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        // Після фільтрації кошик все одно потрібно перерахувати, оскільки 
+        // фільтрація не впливає на загальну суму, лише на відображення.
+        // updateCartTotals();
+    };
+
 
     /**
      * 💰 Обчислює та оновлює загальні суми кошика.
@@ -39,13 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateCartTotals = () => {
         let itemsSubtotal = 0;
         
+        // Оновлюємо список рядків товарів після можливого видалення
+        const currentItemRows = itemRowsContainer.querySelectorAll('.item-row:not(.header-row)');
+
         // 1. Проходимо по кожному товару
-        itemRows.forEach(row => {
+        currentItemRows.forEach(row => {
             const quantityInput = row.querySelector('.item-quantity input');
+            // Перевіряємо, чи існує цей рядок і його елементи
+            if (!quantityInput) return; 
+            
             const pricePerUnitText = row.querySelector('.item-price').textContent;
             const itemTotalDisplay = row.querySelector('.item-total');
 
-            const quantity = parseInt(quantityInput.value);
+            const quantity = parseInt(quantityInput.value) || 0; // Захист від NaN
             const pricePerUnit = parsePrice(pricePerUnitText);
 
             // Розрахунок "Всього" для окремого товару
@@ -64,20 +111,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Вартість доставки
         let deliveryCost = COURIER_COST;
-        let deliveryMethodName = "Кур’єр";
-
+        
         if (deliveryMethodSelect.value === 'pickup') {
             deliveryCost = FREE_DELIVERY;
-            deliveryMethodName = "Самовивіз";
         }
         
-        // Перевіряємо, чи "Кур'єр" обрано в селекті, і оновлюємо лейбл
-        const deliveryLabel = document.querySelector('select[name="delivery_method"] option[value="courier"]').textContent;
-        // Оновлюємо, якщо була зміна
-        if (deliveryLabel !== `Кур’єр (${formatPrice(COURIER_COST)})`) {
-            document.querySelector('select[name="delivery_method"] option[value="courier"]').textContent = `Кур’єр (${formatPrice(COURIER_COST)})`;
-            document.querySelector('select[name="delivery_method"] option[value="pickup"]').textContent = `Самовивіз (безкоштовно)`;
-        }
+        // Оновлюємо лейбли у селекті
+        document.querySelector('select[name="delivery_method"] option[value="courier"]').textContent = `Кур’єр (${formatPrice(COURIER_COST)})`;
+        document.querySelector('select[name="delivery_method"] option[value="pickup"]').textContent = `Самовивіз (безкоштовно)`;
 
         // Кінцева загальна сума
         const grandTotal = subtotalAfterDiscount + deliveryCost;
@@ -103,49 +144,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Додавання обробників подій ---
 
-    // 1. Обробники для зміни кількості
-    itemRows.forEach(row => {
-        const quantityInput = row.querySelector('.item-quantity input');
-        const removeButton = row.querySelector('.item-details button');
-
-        // Оновлення при зміні кількості
-        quantityInput.addEventListener('input', updateCartTotals);
-
-        // Обробник для кнопки "Видалити" (для демонстрації)
-        removeButton.addEventListener('click', () => {
-             // Це зазвичай вимагає AJAX-запиту, але для демо-скрипту просто видаляємо рядок
-            row.remove();
-            // Потрібно оновити itemRows для updateCartTotals, але простіше просто викликати функцію
-            updateCartTotals(); 
-        });
+    // Обробники для пошуку та фільтрації
+    searchInput.addEventListener('input', applyFilters);
+    categoryFilter.addEventListener('change', applyFilters);
+    
+    // Обробники для кількості, видалення та оновлення
+    itemRowsContainer.addEventListener('input', (event) => {
+        if (event.target.type === 'number' && event.target.closest('.item-row:not(.header-row)')) {
+            updateCartTotals();
+        }
     });
 
-    // 2. Обробник для зміни методу доставки
+    itemRowsContainer.addEventListener('click', (event) => {
+        if (event.target.type === 'button' && event.target.textContent.includes('Видалити')) {
+            // Видаляємо рядок товару
+            event.target.closest('.item-row').remove();
+            // Перераховуємо суми та повторно застосовуємо фільтри
+            updateCartTotals(); 
+            applyFilters();
+        }
+    });
+    
     deliveryMethodSelect.addEventListener('change', updateCartTotals);
-
-    // 3. Обробник для кнопки "Оновити кошик" (для демонстрації)
     updateCartButton.addEventListener('click', updateCartTotals);
 
-    // --- Ініціалізація: перший розрахунок ---
-    updateCartTotals();
 
-    // --- 4. Анімація кнопки "Оформити замовлення" ---
-    
-    // Додаємо CSS-клас для анімації (припускаючи, що його буде визначено у `styles.css`)
+    // --- Ініціалізація: перший розрахунок та фільтрація ---
+    updateCartTotals();
+    applyFilters();
+
+    // --- Анімація кнопки "Оформити замовлення" ---
+    // Додаємо CSS-клас для анімації (як було в попередньому варіанті)
     checkoutButton.classList.add('animate-border');
 
-    // Примітка: Без використання keyframes у `styles.css` для візуального ефекту, 
-    // ви можете використати просту анімацію на основі інтервалу, але це не оптимально.
-    // Найкраще додати наступний CSS до `styles.css`:
-    /* @keyframes pulse-border {
-        0% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7); }
-        70% { box-shadow: 0 0 0 5px rgba(255, 165, 0, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0); }
-    }
-    .checkout-button.animate-border {
-        animation: pulse-border 2s infinite;
-        border: 2px solid orange; 
-    }
-    */
-    
 });
