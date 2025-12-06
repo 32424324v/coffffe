@@ -1,158 +1,107 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кошик - Coffee World Shop</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кошик - Coffee World Shop</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header>
-        <h1>Coffee World Shop</h1>
-        <nav>
-            <a href="index.html">Головна</a>
-            <a href="shop.html">Магазин</a>
-            <a href="cart.html">Кошик (4)</a>
-            <a href="contact.html">Контакти</a>
-        </nav>
-    </header>
+    <header>
+        <h1>Coffee World Shop</h1>
+        <nav>
+            <a href="index.html">Головна</a>
+            <a href="shop.html">Магазин</a>
+            <a href="cart.html">Кошик (4)</a>
+            <a href="contact.html">Контакти</a>
+        </nav>
+    </header>
 
-    <div class="container">
+    <div class="container">
 
-        <!-- Ліва частина: товари -->
-        <div class="cart-items">
-            <h2>Ваш Кошик (4 товари)</h2>
+                <div class="cart-items">
+            <h2>Ваш Кошик (4 товари)</h2>
 
-            <!-- Заголовок таблиці -->
-            <div class="item-row header-row">
-                <div class="item-details">Товар</div>
-                <div class="item-quantity">Кількість</div>
-                <div class="item-price">Ціна за од.</div>
-                <div class="item-total">Всього</div>
+            <div class="filter-controls">
+                <input type="text" id="search-input" placeholder="Шукати товари у кошику..." aria-label="Шукати товари у кошику">
+                <select id="category-filter" aria-label="Фільтр за категорією">
+                    <option value="all">Усі категорії</option>
+                    <option value="coffee">Кава</option>
+                    <option value="syrup">Сиропи</option>
+                    <option value="accessory">Аксесуари</option>
+                    </select>
             </div>
+                                    <div class="item-row header-row">
+                <div class="item-details">Товар</div>
+                <div class="item-quantity">Кількість</div>
+                <div class="item-price">Ціна за од.</div>
+                <div class="item-total">Всього</div>
+            </div>
 
-            <!-- Товар 1 -->
-            <div class="item-row">
-                <div class="item-details">
-                    <h4>Арабіка Ефіопія Іргачеффе (250г)</h4>
-                    <small>Обсмажування: Середнє. Помел: Для френч-преса.</small><br>
-                    <button type="button">Видалити</button>
-                </div>
-                <div class="item-quantity">
-                    <input type="number" value="2" min="1">
-                </div>
-                <div class="item-price">1250 грн.</div>
-                <div class="item-total">2500 грн.</div>
-            </div>
+                        <div class="item-row" data-category="coffee">
+                <div class="item-details">
+                    <h4>Арабіка Ефіопія Іргачеффе (250г)</h4>
+                    <small>Обсмажування: Середнє. Помел: Для френч-преса.</small><br>
+                    <button type="button">Видалити</button>
+                </div>
+                <div class="item-quantity">
+                    <input type="number" value="2" min="1">
+                </div>
+                <div class="item-price">1250 грн.</div>
+                <div class="item-total">2500 грн.</div>
+            </div>
 
-            <!-- Товар 2 -->
-            <div class="item-row">
-                <div class="item-details">
-                    <h4>Робуста Індія Парчмент (1 кг)</h4>
-                    <small>Обсмажування: Темне. Помел: Зерно.</small><br>
-                    <button type="button">Видалити</button>
-                </div>
-                <div class="item-quantity">
-                    <input type="number" value="1" min="1">
-                </div>
-                <div class="item-price">2900 грн.</div>
-                <div class="item-total">2900 грн.</div>
-            </div>
+                        <div class="item-row" data-category="coffee">
+                <div class="item-details">
+                    <h4>Робуста Індія Парчмент (1 кг)</h4>
+                    <small>Обсмажування: Темне. Помел: Зерно.</small><br>
+                    <button type="button">Видалити</button>
+                </div>
+                <div class="item-quantity">
+                    <input type="number" value="1" min="1">
+                </div>
+                <div class="item-price">2900 грн.</div>
+                <div class="item-total">2900 грн.</div>
+            </div>
 
-            <!-- Товар 3 -->
-            <div class="item-row">
-                <div class="item-details">
-                    <h4>Сироп "Карамель" (250 мл)</h4>
-                    <small>Смак: Солона карамель.</small><br>
-                    <button type="button">Видалити</button>
-                </div>
-                <div class="item-quantity">
-                    <input type="number" value="1" min="1">
-                </div>
-                <div class="item-price">450 грн.</div>
-                <div class="item-total">450 грн.</div>
-            </div>
+                        <div class="item-row" data-category="syrup">
+                <div class="item-details">
+                    <h4>Сироп "Карамель" (250 мл)</h4>
+                    <small>Смак: Солона карамель.</small><br>
+                    <button type="button">Видалити</button>
+                </div>
+                <div class="item-quantity">
+                    <input type="number" value="1" min="1">
+                </div>
+                <div class="item-price">450 грн.</div>
+                <div class="item-total">450 грн.</div>
+            </div>
 
-            <!-- Товар 4 -->
-            <div class="item-row">
-                <div class="item-details">
-                    <h4>Керамічна чашка для латте</h4>
-                    <small>Колір: Білий. Об’єм: 350 мл.</small><br>
-                    <button type="button">Видалити</button>
-                </div>
-                <div class="item-quantity">
-                    <input type="number" value="4" min="1">
-                </div>
-                <div class="item-price">600 грн.</div>
-                <div class="item-total">2400 грн.</div>
-            </div>
+                        <div class="item-row" data-category="accessory">
+                <div class="item-details">
+                    <h4>Керамічна чашка для латте</h4>
+                    <small>Колір: Білий. Об’єм: 350 мл.</small><br>
+                    <button type="button">Видалити</button>
+                </div>
+                <div class="item-quantity">
+                    <input type="number" value="4" min="1">
+                </div>
+                <div class="item-price">600 грн.</div>
+                <div class="item-total">2400 грн.</div>
+            </div>
 
-            <button class="cta-button">Оновити кошик</button>
-        </div>
+            <button class="cta-button">Оновити кошик</button>
+        </div>
 
-        <!-- Права частина: сума + форма -->
-        <div class="cart-summary">
-            <h3>Зведення замовлення</h3>
+                <div class="cart-summary">
+            <h3>Зведення замовлення</h3>
 
-            <div class="item-row">
-                <div class="item-details">Товари (сума)</div>
-                <div class="item-total">8250 грн.</div>
-            </div>
+            <div class="item-row">
+                <div class="item-details">Товари (сума)</div>
+                <div class="item-total">8250 грн.</div>
+            </div>
 
-            <div class="item-row">
-                <div class="item-details">Знижка</div>
-                <div class="item-total" style="color: green;">-825 грн. (10%)</div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-details">Доставка</div>
-                <div class="item-total">500 грн.</div>
-            </div>
-
-            <h3>Всього: 7925 грн.</h3>
-
-            <form class="checkout-form" action="checkout.php" method="POST">
-                <h3>Деталі доставки</h3>
-
-                <label>Ім’я та прізвище:</label>
-                <input type="text" name="full_name" required>
-
-                <label>E-mail:</label>
-                <input type="email" name="email" required>
-
-                <label>Телефон:</label>
-                <input type="tel" name="phone" required>
-
-                <label>Місто:</label>
-                <input type="text" name="city" required>
-
-                <label>Адреса:</label>
-                <input type="text" name="address" required>
-
-                <label>Спосіб доставки:</label>
-                <select name="delivery_method">
-                    <option value="courier">Кур’єр (500 грн.)</option>
-                    <option value="pickup">Самовивіз (безкоштовно)</option>
-                </select>
-
-                <label>Спосіб оплати:</label>
-                <select name="payment_method">
-                    <option value="card">Картка онлайн</option>
-                    <option value="cash">Готівкою кур’єру</option>
-                </select>
-
-                <button type="submit" class="checkout-button">Оформити заказ</button>
-            </form>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>Потрібна допомога? Телефонуйте: +380 (44) 123-45-67</p>
-        <p>&copy; 2025 Coffee World Shop</p>
-    </footer>
-
-</body>
-</html>
-
+            <div class="item-row">
+                <div class="item-details">Знижка</div>
+                <div class="item-total" style="color: green;">-825 грн. (10%)</div>
