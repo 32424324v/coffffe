@@ -1,4 +1,5 @@
-
+<!DOCTYPE html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,23 +23,24 @@
                 <div class="cart-items">
             <h2>Ваш Кошик (4 товари)</h2>
 
-            <div class="filter-controls">
-                <input type="text" id="search-input" placeholder="Шукати товари у кошику..." aria-label="Шукати товари у кошику">
-                <select id="category-filter" aria-label="Фільтр за категорією">
-                    <option value="all">Усі категорії</option>
-                    <option value="coffee">Кава</option>
-                    <option value="syrup">Сиропи</option>
-                    <option value="accessory">Аксесуари</option>
-                    </select>
-            </div>
-                                    <div class="item-row header-row">
+            <div class="filter-controls">
+                <input type="text" id="search-input" placeholder="Шукати товари у кошику..." aria-label="Шукати товари у кошику">
+                <select id="category-filter" aria-label="Фільтр за категорією">
+                    <option value="all">Усі категорії</option>
+                    <option value="coffee">Кава</option>
+                    <option value="syrup">Сиропи</option>
+                    <option value="accessory">Аксесуари</option>
+                </select>
+            </div>
+
+                        <div class="item-row header-row">
                 <div class="item-details">Товар</div>
                 <div class="item-quantity">Кількість</div>
                 <div class="item-price">Ціна за од.</div>
                 <div class="item-total">Всього</div>
             </div>
 
-                        <div class="item-row" data-category="coffee">
+                        <div class="item-row" data-category="coffee">
                 <div class="item-details">
                     <h4>Арабіка Ефіопія Іргачеффе (250г)</h4>
                     <small>Обсмажування: Середнє. Помел: Для френч-преса.</small><br>
@@ -51,7 +53,7 @@
                 <div class="item-total">2500 грн.</div>
             </div>
 
-                        <div class="item-row" data-category="coffee">
+                        <div class="item-row" data-category="coffee">
                 <div class="item-details">
                     <h4>Робуста Індія Парчмент (1 кг)</h4>
                     <small>Обсмажування: Темне. Помел: Зерно.</small><br>
@@ -64,7 +66,7 @@
                 <div class="item-total">2900 грн.</div>
             </div>
 
-                        <div class="item-row" data-category="syrup">
+                        <div class="item-row" data-category="syrup">
                 <div class="item-details">
                     <h4>Сироп "Карамель" (250 мл)</h4>
                     <small>Смак: Солона карамель.</small><br>
@@ -77,7 +79,7 @@
                 <div class="item-total">450 грн.</div>
             </div>
 
-                        <div class="item-row" data-category="accessory">
+                        <div class="item-row" data-category="accessory">
                 <div class="item-details">
                     <h4>Керамічна чашка для латте</h4>
                     <small>Колір: Білий. Об’єм: 350 мл.</small><br>
@@ -90,17 +92,4 @@
                 <div class="item-total">2400 грн.</div>
             </div>
 
-            <button class="cta-button">Оновити кошик</button>
-        </div>
-
-                <div class="cart-summary">
-            <h3>Зведення замовлення</h3>
-
-            <div class="item-row">
-                <div class="item-details">Товари (сума)</div>
-                <div class="item-total">8250 грн.</div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-details">Знижка</div>
-                <div class="item-total" style="color: green;">-825 грн. (10%)</div>
+            <button class="cta-button">
