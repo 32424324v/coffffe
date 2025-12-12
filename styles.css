@@ -6,7 +6,7 @@
 
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background: #f3efea; /* М'який світло-бежевий */
+  background: #f3efea; 
   color: #4a3f35;
   line-height: 1.6;
 }
@@ -15,7 +15,7 @@ body {
 /* HEADER */
 /* ================================== */
 header {
-  background: linear-gradient(135deg, #6d4c41, #4e342e); /* Коричневий градієнт */
+  background: linear-gradient(135deg, #6d4c41, #4e342e);
   color: #fff;
   padding: 25px 0;
   text-align: center;
@@ -52,6 +52,7 @@ nav a:hover {
   max-width: 1400px;
   margin: 45px auto;
   display: grid;
+  /* Встановлюємо правильну сітку для двох колонок */
   grid-template-columns: 1.6fr 1fr;
   gap: 45px;
   padding: 0 40px;
@@ -108,10 +109,9 @@ h2, h3 {
   border-bottom: none;
 }
 
-/* --- РОЗМІРИ КОЛОНОК ТОВАРІВ (FIX) --- */
+/* --- РОЗМІРИ КОЛОНОК ТОВАРІВ (FIXED) --- */
 .item-details { 
     width: 45%; 
-    /* Вирівнювання тексту за замовчуванням */
     text-align: left; 
 }
 
@@ -131,12 +131,6 @@ h2, h3 {
     font-weight: bold;
     color: #3c2f29;
 }
-
-/* Забезпечуємо, що заголовки теж вирівняні правильно */
-.header-row .item-details { text-align: left; }
-.header-row .item-quantity { text-align: center; }
-.header-row .item-price { text-align: right; }
-.header-row .item-total { text-align: right; }
 /* --- КІНЕЦЬ FIX --- */
 
 
@@ -169,11 +163,11 @@ h2, h3 {
   border-radius: 6px;
   border: 1px solid #c6b6a7;
   background: #f7f3ef;
-  text-align: center; /* Центрування значення */
+  text-align: center; 
 }
 
 .cta-button {
-  background: #e67e22; /* Помаранчевий */
+  background: #e67e22; 
   color: white;
   padding: 14px;
   font-size: 1.15rem;
@@ -201,17 +195,29 @@ h2, h3 {
 }
 
 .cart-summary .item-row {
-  /* Використовуємо .item-row для зведення, але краще використовувати інший клас, 
-    наприклад, .summary-line, щоб уникнути конфліктів стилів таблиці. 
-    Поки що залишаємо так, але майте на увазі. */
   padding: 14px 0;
   font-size: 1.1rem;
+  display: flex; /* Забезпечуємо flex і тут */
+  justify-content: space-between;
+  border-bottom: 1px solid #e0d6cd;
 }
 
-.cart-summary h3:last-of-type {
+.cart-summary .item-row:last-of-type {
+  border-bottom: none;
+}
+
+.cart-summary h3 {
+  /* Заголовки форми не мають нижньої лінії */
+  border-bottom: none; 
+}
+
+/* Загальна сума */
+.cart-summary h3:last-of-type { 
   color: #b83535;
   font-size: 1.6rem;
-  border-bottom: none;
+  margin-top: 20px;
+  border-top: 1px solid #e0d6cd;
+  padding-top: 15px;
 }
 
 /* ================================== */
@@ -220,7 +226,7 @@ h2, h3 {
 .checkout-form label {
   font-weight: 600;
   margin-top: 12px;
-  display: block; /* Важливо для правильного відступу */
+  display: block; 
 }
 
 .checkout-form input,
@@ -231,12 +237,12 @@ h2, h3 {
   border: 1px solid #c7b7a8;
   background: #faf7f4;
   font-size: 1rem;
-  box-sizing: border-box; /* Важливо для коректної ширини */
+  box-sizing: border-box; 
   margin-bottom: 10px;
 }
 
 .checkout-button {
-  background: #2ecc71; /* Зелений */
+  background: #2ecc71; 
   color: white;
   padding: 16px;
   font-size: 1.2rem;
@@ -274,7 +280,6 @@ footer p {
 /* ================================== */
 @media (max-width: 900px) {
     .container {
-        /* Перетворюємо сітку на одну колонку для мобільних пристроїв */
         grid-template-columns: 1fr; 
         gap: 30px;
         padding: 0 20px;
@@ -292,37 +297,34 @@ footer p {
     }
 
     .item-row {
-        /* Дозволяємо переносити рядки */
         flex-wrap: wrap; 
         padding: 15px 0;
     }
     
-    /* Приховуємо заголовок таблиці на мобільних */
     .item-row.header-row {
         display: none; 
     }
     
-    /* Змінюємо порядок елементів для мобільних */
     .item-details { 
         width: 100%; 
-        order: 1; /* Зверху */
+        order: 1; 
     }
     
     .item-quantity { 
         width: 30%; 
-        order: 3; /* Зліва внизу */
+        order: 3; 
         text-align: left;
     }
     
     .item-price { 
         width: 35%; 
-        order: 2; /* В середині */
+        order: 2; 
         text-align: center;
     }
     
     .item-total { 
         width: 35%; 
-        order: 4; /* Справа внизу */
+        order: 4; 
         font-size: 1.1em;
     }
 
