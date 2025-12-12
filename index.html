@@ -4,138 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кошик - Coffee World Shop</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cart.css">
 </head>
+
 <body>
 
-    <header>
+<header>
+    <div class="header-inner">
         <h1>Coffee World Shop</h1>
+
         <nav>
             <a href="index.html">Головна</a>
             <a href="shop.html">Магазин</a>
-            <a href="cart.html">Кошик (4)</a>
+            <a class="active" href="cart.html">Кошик (4)</a>
             <a href="contact.html">Контакти</a>
         </nav>
-    </header>
+    </div>
+</header>
 
-    <div class="container">
+<main class="container">
 
-        <div class="cart-items">
-            <h2>Ваш Кошик (4 товари)</h2>
+    <!-- LEFT SIDE -->
+    <section class="cart-items">
+        <h2>Ваш Кошик</h2>
 
-            <div class="filter-controls">
-                <input type="text" id="search-input" placeholder="Шукати товари у кошику..." aria-label="Шукати товари у кошику">
-                <select id="category-filter" aria-label="Фільтр за категорією">
-                    <option value="all">Усі категорії</option>
-                    <option value="coffee">Кава</option>
-                    <option value="syrup">Сиропи</option>
-                    <option value="accessory">Аксесуари</option>
-                </select>
-            </div>
-
-            <div class="item-row header-row">
-                <div class="item-details">Товар</div>
-                <div class="item-quantity">Кількість</div>
-                <div class="item-price">Ціна за од.</div>
-                <div class="item-total">Всього</div>
-            </div>
-
-            <div class="item-row" data-category="coffee">
-                <div class="item-details">
-                    <h4>Арабіка Ефіопія Іргачеффе (250г)</h4>
-                    <small>Обсмажування: Середнє. Помел: Для френч-преса.</small><br>
-                    <button type="button">Видалити</button>
-                </div>
-                <div class="item-quantity">
-                    <input type="number" value="2" min="1">
-                </div>
-                <div class="item-price">1250 грн.</div>
-                <div class="item-total">2500 грн.</div>
-            </div>
-
-            <div class="item-row" data-category="coffee">
-                <div class="item-details">
-                    <h4>Робуста Індія Парчмент (1 кг)</h4>
-                    <small>Обсмажування: Темне. Помел: Зерно.</small><br>
-                    <button type="button">Видалити</button>
-                </div>
-                <div class="item-quantity">
-                    <input type="number" value="1" min="1">
-                </div>
-                <div class="item-price">2900 грн.</div>
-                <div class="item-total">2900 грн.</div>
-            </div>
-
-            <div class="item-row" data-category="syrup">
-                <div class="item-details">
-                    <h4>Сироп "Карамель" (250 мл)</h4>
-                    <small>Смак: Солона карамель.</small><br>
-                    <button type="button">Видалити</button>
-                </div>
-                <div class="item-quantity">
-                    <input type="number" value="1" min="1">
-                </div>
-                <div class="item-price">450 грн.</div>
-                <div class="item-total">450 грн.</div>
-            </div>
-
-            <div class="item-row" data-category="accessory">
-                <div class="item-details">
-                    <h4>Керамічна чашка для латте</h4>
-                    <small>Колір: Білий. Об’єм: 350 мл.</small><br>
-                    <button type="button">Видалити</button>
-                </div>
-                <div class="item-quantity">
-                    <input type="number" value="4" min="1">
-                </div>
-                <div class="item-price">600 грн.</div>
-                <div class="item-total">2400 грн.</div>
-            </div>
-
-            <button class="cta-button">Продовжити покупки</button>
-
-        </div> <div class="cart-summary">
-            <h3>Зведення замовлення</h3>
-
-            <div class="item-row">
-                <span>Проміжна сума (4 товари):</span>
-                <span>8250 грн.</span>
-            </div>
-            <div class="item-row">
-                <span>Доставка:</span>
-                <span>Розраховується</span>
-            </div>
-            
-            <div class="item-row" style="border-bottom: none;">
-                <span>Знижка:</span>
-                <span>0 грн.</span>
-            </div>
-
-            <h3 style="margin-top: 20px;">Разом до сплати: 8250 грн.</h3>
-
-            <form class="checkout-form">
-                <h4>Контактні дані</h4>
-                <label for="name">Ваше ім'я</label>
-                <input type="text" id="name" placeholder="Іван" required>
-                
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="example@mail.com" required>
-
-                <label for="city">Місто доставки</label>
-                <select id="city" required>
-                    <option value="">Оберіть місто...</option>
-                    <option value="kyiv">Київ</option>
-                    <option value="lviv">Львів</option>
-                </select>
-
-                <button type="submit" class="checkout-button">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
-            </form>
+        <div class="filter-bar">
+            <input type="text" placeholder="Пошук у кошику...">
+            <select>
+                <option>Усі категорії</option>
+                <option>Кава</option>
+                <option>Сиропи</option>
+                <option>Аксесуари</option>
+            </select>
         </div>
 
+        <!-- ITEM -->
+        <div class="cart-card">
+            <div class="card-info">
+                <h3>Арабіка Ефіопія Іргачеффе (250г)</h3>
+                <p>Середнє обсмажування • Помел: френч-прес</p>
+                <button class="remove-btn">Видалити</button>
+            </div>
 
-    </div> <footer>
-        <p>© 2025 Coffee World Shop. Всі права захищені.</p>
-    </footer>
+            <div class="card-mid">
+                <input type="number" value="2" min="1">
+            </div>
+
+            <div class="card-price">
+                <div>1250 грн</div>
+                <strong>2500 грн</strong>
+            </div>
+        </div>
+
+        <!-- ITEM -->
+        <div class="cart-card">
+            <div class="card-info">
+                <h3>Робуста Індія Парчмент (1 кг)</h3>
+                <p>Темне обсмажування • Зерно</p>
+                <button class="remove-btn">Видалити</button>
+            </div>
+
+            <div class="card-mid">
+                <input type="number" value="1" min="1">
+            </div>
+
+            <div class="card-price">
+                <div>2900 грн</div>
+                <strong>2900 грн</strong>
+            </div>
+        </div>
+
+        <!-- ITEM -->
+        <div class="cart-card">
+            <div class="card-info">
+                <h3>Сироп “Карамель” (250 мл)</h3>
+                <p>Смак: солона карамель</p>
+                <button class="remove-btn">Видалити</button>
+            </div>
+
+            <div class="card-mid">
+                <input type="number" value="1" min="1">
+            </div>
+
+            <div class="card-price">
+                <div>450 грн</div>
+                <strong>450 грн</strong>
+            </div>
+        </div>
+
+        <!-- ITEM -->
+        <div class="cart-card">
+            <div class="card-info">
+                <h3>Керамічна чашка для латте</h3>
+                <p>Біла • 350 мл</p>
+                <button class="remove-btn">Видалити</button>
+            </div>
+
+            <div class="card-mid">
+                <input type="number" value="4" min="1">
+            </div>
+
+            <div class="card-price">
+                <div>600 грн</div>
+                <strong>2400 грн</strong>
+            </div>
+        </div>
+
+        <button class="back-btn">⬅ Продовжити покупки</button>
+
+    </section>
+
+    <!-- RIGHT SIDE -->
+    <aside class="summary-box">
+        <h2>Зведення замовлення</h2>
+
+        <div class="sum-row">
+            <span>Проміжна сума:</span>
+            <strong>8250 грн</strong>
+        </div>
+
+        <div class="sum-row">
+            <span>Доставка:</span>
+            <span class="light">Розраховується</span>
+        </div>
+
+        <div class="sum-row">
+            <span>Знижка:</span>
+            <strong>0 грн</strong>
+        </div>
+
+        <hr>
+
+        <div class="total">
+            <span>Разом до сплати:</span>
+            <strong>8250 грн</strong>
+        </div>
+
+        <form class="checkout">
+            <label>Ваше ім’я</label>
+            <input type="text" placeholder="Іван">
+
+            <label>Email</label>
+            <input type="email" placeholder="example@gmail.com">
+
+            <label>Місто доставки</label>
+            <select>
+                <option selected>Оберіть місто…</option>
+                <option>Київ</option>
+                <option>Львів</option>
+            </select>
+
+            <button class="order-btn">Оформити замовлення</button>
+        </form>
+    </aside>
+
+</main>
+
+<footer>
+    <p>© 2025 Coffee World Shop</p>
+</footer>
 
 </body>
 </html>
