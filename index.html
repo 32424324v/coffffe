@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee World Shop – Головна</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <h1>Coffee World Shop</h1>
+    <nav>
+      <a class="active" href="index.html">Головна</a>
+      <a href="shop.html">Магазин</a>
+      <a href="cart.html">Кошик</a>
+      <a href="contact.html">Контакти</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Герой-секція -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Найкраща кава для справжніх поціновувачів</h2>
+      <p>Відбірні сорти з усього світу, свіже обсмажування та неперевершена якість</p>
+      <a href="shop.html" class="btn-primary">До магазину</a>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Кава">
+    </div>
+  </section>
+
+  <!-- Особливості -->
+  <section class="features">
+    <div class="container">
+      <h2>Чому обирають нас</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-coffee"></i>
+          <h3>Свіже обсмажування</h3>
+          <p>Щодня обсмажуємо каву на професійному обладнанні</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-globe-americas"></i>
+          <h3>Прямі поставки</h3>
+          <p>Працюємо безпосередньо з виробниками з Ефіопії, Бразилії, Колумбії</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-shipping-fast"></i>
+          <h3>Швидка доставка</h3>
+          <p>Доставляємо по всій Україні за 1-3 дні</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-award"></i>
+          <h3>Гарантія якості</h3>
+          <p>100% гарантія повернення коштів, якщо кава не сподобалась</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Популярні товари -->
+  <section class="popular-products">
+    <div class="container">
+      <h2>Популярні товари</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1587734195685-0b74c9c5c78b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Арабіка Ефіопія">
+          </div>
+          <div class="product-info">
+            <h3>Арабіка Ефіопія</h3>
+            <p>Фрутові ноти, середнє обсмажування</p>
+            <div class="product-price">1250 грн</div>
+            <button class="btn-add" onclick="addToCart('Арабіка Ефіопія', 1250)">Додати до кошика</button>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Робуста Індія">
+          </div>
+          <div class="product-info">
+            <h3>Робуста Індія</h3>
+            <p>Насичений смак, темне обсмажування</p>
+            <div class="product-price">2900 грн</div>
+            <button class="btn-add" onclick="addToCart('Робуста Індія', 2900)">Додати до кошика</button>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1570196911496-66bd58a5b7b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сироп ванільний">
+          </div>
+          <div class="product-info">
+            <h3>Сироп ванільний</h3>
+            <p>Monin, 1 літр, для кави та коктейлів</p>
+            <div class="product-price">450 грн</div>
+            <button class="btn-add" onclick="addToCart('Сироп ванільний', 450)">Додати до кошика</button>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1524350876685-274059332603?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Френч-прес">
+          </div>
+          <div class="product-info">
+            <h3>Френч-прес Bodum</h3>
+            <p>Скляний, 1 літр, нержавіюча сталь</p>
+            <div class="product-price">1800 грн</div>
+            <button class="btn-add" onclick="addToCart('Френч-прес Bodum', 1800)">Додати до кошика</button>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="shop.html" class="btn-secondary">Переглянути весь каталог</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Про нас -->
+  <section class="about">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>Наша історія</h2>
+          <p>Ми - команда ентузіастів, які об'єднали любов до якісної кави та бажання ділитися нею з іншими. З 2015 року ми відбираємо найкращі сорти кави з усього світу.</p>
+          <p>Наша місія - робити справді хорошу каву доступною для кожного. Ми контролюємо весь цикл - від вибору зерна до доставки вам додому.</p>
+          <a href="contact.html" class="btn-primary">Зв'язатися з нами</a>
+        </div>
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Наша кав'ярня">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Відгуки -->
+  <section class="testimonials">
+    <div class="container">
+      <h2>Що кажуть наші клієнти</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            <p>"Найкраща кава, яку я коли-небудь пробував! Замовляю вже рік і щоразу отримую свіжий продукт."</p>
+          </div>
+          <div class="testimonial-author">
+            <h4>Олександр К.</h4>
+            <p>Постійний клієнт</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            <p>"Швидка доставка, приємне обслуговування. Кава завжди свіжообсмажена, аромат неймовірний!"</p>
+          </div>
+          <div class="testimonial-author">
+            <h4>Марія П.</h4>
+            <p>Кавомайстер</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            <p>"Як власник кав'ярні, дуже вибаглива до якості. Coffee World Shop - мій основний постачальник вже 2 роки."</p>
+          </div>
+          <div class="testimonial-author">
+            <h4>Андрій Л.</h4>
+            <p>Власник кав'ярні</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Coffee World Shop</h3>
+      <p>Найкраща кава з усього світу прямо до ваших дверей.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Контакти</h3>
+      <p>📍 Київ, вул. Кавова, 15</p>
+      <p>📞 +380 12 345 6789</p>
+      <p>✉️ info@coffeeworld.com</p>
+    </div>
+    <div class="footer-section">
+      <h3>Графік роботи</h3>
+      <p>Пн-Пт: 9:00 - 20:00</p>
+      <p>Сб-Нд: 10:00 - 18:00</p>
+    </div>
+    <div class="footer-section">
+      <h3>Соцмережі</h3>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-telegram"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Coffee World Shop. Усі права захищені.</p>
+  </div>
+</footer>
+
+<script>
+  function addToCart(productName, price) {
+    // Тимчасове повідомлення про додавання в кошик
+    alert(`Товар "${productName}" додано до кошика!\n\nЦіна: ${price} грн\n\nПерейдіть у кошик для оформлення замовлення.`);
+    
+    // У реальному проекті тут буде код для додавання в localStorage
+    localStorage.setItem('lastAddedProduct', JSON.stringify({
+      name: productName,
+      price: price,
+      time: new Date().toISOString()
+    }));
+    
+    // Перенаправлення в кошик (опційно)
+    // window.location.href = 'cart.html';
+  }
+  
+  // Анімація при прокрутці
+  document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+    
+    // Спостерігаємо за картками
+    document.querySelectorAll('.feature-card, .product-card, .testimonial-card').forEach(card => {
+      observer.observe(card);
+    });
+  });
+</script>
+</body>
+</html>
