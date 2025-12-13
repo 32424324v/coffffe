@@ -1,55 +1,58 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const cards = document.querySelectorAll(".cart-card");
-    const searchInput = document.getElementById("search-input");
-    const categoryFilter = document.getElementById("category-filter");
-    const subtotalEl = document.getElementById("subtotal");
-    const totalEl = document.getElementById("grand-total");
+  const searchInput = document.getElementById("search-input");
+  const categoryFilter = document.getElementById("category-filter");
+  const subtotalEl = document.getElementById("subtotal");
+  const totalEl = document.getElementById("grand-total");
 
-    function updateTotals() {
-        let sum = 0;
+  function updateTotals() {
+    let sum = 0;
 
-        document.querySelectorAll(".cart-card").forEach(card => {
-            const qty = card.querySelector(".qty").value;
-            const price = card.querySelector(".price").dataset.price;
-            const total = qty * price;
+    document.querySelectorAll(".cart-card").forEach(card => {
+      if (card.style.display === "none") return;
 
-            card.querySelector(".total").textContent = total + " грн";
-            sum += total;
-        });
+      const qty = parseInt(card.querySelector(".qty").value);
+      const price = parseInt(card.querySelector(".price").dataset.price);
+      const total = qty * price;
 
-        subtotalEl.textContent = sum + " грн";
-        totalEl.textContent = sum + " грн";
-    }
-
-    document.addEventListener("input", e => {
-        if (e.target.classList.contains("qty")) {
-            updateTotals();
-        }
+      card.querySelector(".item-total").textContent = total + " грн";
+      sum += total;
     });
 
-    document.addEventListener("click", e => {
-        if (e.target.classList.contains("remove-btn")) {
-            e.target.closest(".cart-card").remove();
-            updateTotals();
-        }
+    subtotalEl.textContent = sum + " грн";
+    totalEl.textContent = sum + " грн";
+  }
+
+  function applyFilters() {
+    const text = searchInput.value.toLowerCase();
+    const category = categoryFilter.value;
+
+    document.querySelectorAll(".cart-card").forEach(card => {
+      const name = card.querySelector("h3").textContent.toLowerCase();
+      const matchText = name.includes(text);
+      const matchCat = category === "all" || card.dataset.category === category;
+
+      card.style.display = matchText && matchCat ? "grid" : "none";
     });
-
-    function applyFilters() {
-        const text = searchInput.value.toLowerCase();
-        const category = categoryFilter.value;
-
-        cards.forEach(card => {
-            const name = card.querySelector("h3").textContent.toLowerCase();
-            const matchText = name.includes(text);
-            const matchCat = category === "all" || card.dataset.category === category;
-
-            card.style.display = matchText && matchCat ? "grid" : "none";
-        });
-    }
-
-    searchInput.addEventListener("input", applyFilters);
-    categoryFilter.addEventListener("change", applyFilters);
 
     updateTotals();
+  }
+
+  document.addEventListener("input", e => {
+    if (e.target.classList.contains("qty")) {
+      updateTotals();
+    }
+  });
+
+  document.addEventListener("click", e => {
+    if (e.target.classList.contains("remove-btn")) {
+      e.target.closest(".cart-card").remove();
+      updateTotals();
+    }
+  });
+
+  searchInput.addEventListener("input", applyFilters);
+  categoryFilter.addEventListener("change", applyFilters);
+
+  updateTotals();
 });
