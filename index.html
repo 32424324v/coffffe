@@ -210,18 +210,14 @@
 
 <script>
   function addToCart(productName, price) {
-    // Тимчасове повідомлення про додавання в кошик
     alert(`Товар "${productName}" додано до кошика!\n\nЦіна: ${price} грн\n\nПерейдіть у кошик для оформлення замовлення.`);
     
-    // У реальному проекті тут буде код для додавання в localStorage
+    // Зберігаємо в localStorage
     localStorage.setItem('lastAddedProduct', JSON.stringify({
       name: productName,
       price: price,
       time: new Date().toISOString()
     }));
-    
-    // Перенаправлення в кошик (опційно)
-    // window.location.href = 'cart.html';
   }
   
   // Анімація при прокрутці
