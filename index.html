@@ -12,11 +12,10 @@
 <header>
     <div class="header-inner">
         <h1>Coffee World Shop</h1>
-
         <nav>
             <a href="index.html">Головна</a>
             <a href="shop.html">Магазин</a>
-            <a class="active" href="cart.html">Кошик (4)</a>
+            <a class="active" href="cart.html">Кошик</a>
             <a href="contact.html">Контакти</a>
         </nav>
     </div>
@@ -24,145 +23,66 @@
 
 <main class="container">
 
-    <!-- LEFT SIDE -->
-    <section class="cart-items">
-        <h2>Ваш Кошик</h2>
+<section class="cart-items">
+    <h2>Ваш кошик</h2>
 
-        <div class="filter-bar">
-            <input type="text" placeholder="Пошук у кошику...">
-            <select>
-                <option>Усі категорії</option>
-                <option>Кава</option>
-                <option>Сиропи</option>
-                <option>Аксесуари</option>
-            </select>
+    <div class="filter-bar">
+        <input id="search-input" type="text" placeholder="Пошук товару...">
+        <select id="category-filter">
+            <option value="all">Усі категорії</option>
+            <option value="coffee">Кава</option>
+            <option value="syrup">Сиропи</option>
+            <option value="accessory">Аксесуари</option>
+        </select>
+    </div>
+
+    <!-- ITEM -->
+    <div class="cart-card" data-category="coffee">
+        <div class="card-info">
+            <h3>Арабіка Ефіопія Іргачеффе</h3>
+            <p>Середнє обсмажування</p>
+            <button class="remove-btn">Видалити</button>
         </div>
+        <input class="qty" type="number" value="2" min="1">
+        <div class="price" data-price="1250">1250 грн</div>
+        <div class="total">2500 грн</div>
+    </div>
 
-        <!-- ITEM -->
-        <div class="cart-card">
-            <div class="card-info">
-                <h3>Арабіка Ефіопія Іргачеффе (250г)</h3>
-                <p>Середнє обсмажування • Помел: френч-прес</p>
-                <button class="remove-btn">Видалити</button>
-            </div>
-
-            <div class="card-mid">
-                <input type="number" value="2" min="1">
-            </div>
-
-            <div class="card-price">
-                <div>1250 грн</div>
-                <strong>2500 грн</strong>
-            </div>
+    <div class="cart-card" data-category="coffee">
+        <div class="card-info">
+            <h3>Робуста Індія</h3>
+            <p>Темне обсмажування</p>
+            <button class="remove-btn">Видалити</button>
         </div>
+        <input class="qty" type="number" value="1" min="1">
+        <div class="price" data-price="2900">2900 грн</div>
+        <div class="total">2900 грн</div>
+    </div>
 
-        <!-- ITEM -->
-        <div class="cart-card">
-            <div class="card-info">
-                <h3>Робуста Індія Парчмент (1 кг)</h3>
-                <p>Темне обсмажування • Зерно</p>
-                <button class="remove-btn">Видалити</button>
-            </div>
+</section>
 
-            <div class="card-mid">
-                <input type="number" value="1" min="1">
-            </div>
+<aside class="summary-box">
+    <h2>Зведення</h2>
 
-            <div class="card-price">
-                <div>2900 грн</div>
-                <strong>2900 грн</strong>
-            </div>
-        </div>
+    <div class="sum-row">
+        <span>Проміжна сума</span>
+        <span id="subtotal">0 грн</span>
+    </div>
 
-        <!-- ITEM -->
-        <div class="cart-card">
-            <div class="card-info">
-                <h3>Сироп “Карамель” (250 мл)</h3>
-                <p>Смак: солона карамель</p>
-                <button class="remove-btn">Видалити</button>
-            </div>
+    <div class="total">
+        <span>Разом</span>
+        <span id="grand-total">0 грн</span>
+    </div>
 
-            <div class="card-mid">
-                <input type="number" value="1" min="1">
-            </div>
-
-            <div class="card-price">
-                <div>450 грн</div>
-                <strong>450 грн</strong>
-            </div>
-        </div>
-
-        <!-- ITEM -->
-        <div class="cart-card">
-            <div class="card-info">
-                <h3>Керамічна чашка для латте</h3>
-                <p>Біла • 350 мл</p>
-                <button class="remove-btn">Видалити</button>
-            </div>
-
-            <div class="card-mid">
-                <input type="number" value="4" min="1">
-            </div>
-
-            <div class="card-price">
-                <div>600 грн</div>
-                <strong>2400 грн</strong>
-            </div>
-        </div>
-
-        <button class="back-btn">⬅ Продовжити покупки</button>
-
-    </section>
-
-    <!-- RIGHT SIDE -->
-    <aside class="summary-box">
-        <h2>Зведення замовлення</h2>
-
-        <div class="sum-row">
-            <span>Проміжна сума:</span>
-            <strong>8250 грн</strong>
-        </div>
-
-        <div class="sum-row">
-            <span>Доставка:</span>
-            <span class="light">Розраховується</span>
-        </div>
-
-        <div class="sum-row">
-            <span>Знижка:</span>
-            <strong>0 грн</strong>
-        </div>
-
-        <hr>
-
-        <div class="total">
-            <span>Разом до сплати:</span>
-            <strong>8250 грн</strong>
-        </div>
-
-        <form class="checkout">
-            <label>Ваше ім’я</label>
-            <input type="text" placeholder="Іван">
-
-            <label>Email</label>
-            <input type="email" placeholder="example@gmail.com">
-
-            <label>Місто доставки</label>
-            <select>
-                <option selected>Оберіть місто…</option>
-                <option>Київ</option>
-                <option>Львів</option>
-            </select>
-
-            <button class="order-btn">Оформити замовлення</button>
-        </form>
-    </aside>
+    <button class="order-btn">Оформити замовлення</button>
+</aside>
 
 </main>
 
 <footer>
-    <p>© 2025 Coffee World Shop</p>
+    © 2025 Coffee World Shop
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
