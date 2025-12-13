@@ -1,86 +1,84 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кошик - Coffee World Shop</title>
-    <link rel="stylesheet" href="cart.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кошик – Coffee World Shop</title>
+  <link rel="stylesheet" href="cart.css">
 </head>
-
 <body>
 
 <header>
-    <div class="header-inner">
-        <h1>Coffee World Shop</h1>
-        <nav>
-            <a href="index.html">Головна</a>
-            <a href="shop.html">Магазин</a>
-            <a class="active" href="cart.html">Кошик</a>
-            <a href="contact.html">Контакти</a>
-        </nav>
-    </div>
+  <div class="header-inner">
+    <h1>Coffee World Shop</h1>
+    <nav>
+      <a href="index.html">Головна</a>
+      <a href="shop.html">Магазин</a>
+      <a class="active" href="cart.html">Кошик</a>
+      <a href="contact.html">Контакти</a>
+    </nav>
+  </div>
 </header>
 
 <main class="container">
 
 <section class="cart-items">
-    <h2>Ваш кошик</h2>
+  <h2>Ваш кошик</h2>
 
-    <div class="filter-bar">
-        <input id="search-input" type="text" placeholder="Пошук товару...">
-        <select id="category-filter">
-            <option value="all">Усі категорії</option>
-            <option value="coffee">Кава</option>
-            <option value="syrup">Сиропи</option>
-            <option value="accessory">Аксесуари</option>
-        </select>
-    </div>
+  <div class="filter-bar">
+    <input id="search-input" type="text" placeholder="Пошук товару...">
+    <select id="category-filter">
+      <option value="all">Усі категорії</option>
+      <option value="coffee">Кава</option>
+      <option value="syrup">Сиропи</option>
+      <option value="accessory">Аксесуари</option>
+    </select>
+  </div>
 
-    <!-- ITEM -->
-    <div class="cart-card" data-category="coffee">
-        <div class="card-info">
-            <h3>Арабіка Ефіопія Іргачеффе</h3>
-            <p>Середнє обсмажування</p>
-            <button class="remove-btn">Видалити</button>
-        </div>
-        <input class="qty" type="number" value="2" min="1">
-        <div class="price" data-price="1250">1250 грн</div>
-        <div class="total">2500 грн</div>
+  <div class="cart-card" data-category="coffee">
+    <div class="card-info">
+      <h3>Арабіка Ефіопія Іргачеффе</h3>
+      <p>Середнє обсмажування</p>
+      <button class="remove-btn">Видалити</button>
     </div>
+    <input class="qty" type="number" value="2" min="1">
+    <div class="price" data-price="1250">1250 грн</div>
+    <div class="item-total">2500 грн</div>
+  </div>
 
-    <div class="cart-card" data-category="coffee">
-        <div class="card-info">
-            <h3>Робуста Індія</h3>
-            <p>Темне обсмажування</p>
-            <button class="remove-btn">Видалити</button>
-        </div>
-        <input class="qty" type="number" value="1" min="1">
-        <div class="price" data-price="2900">2900 грн</div>
-        <div class="total">2900 грн</div>
+  <div class="cart-card" data-category="coffee">
+    <div class="card-info">
+      <h3>Робуста Індія</h3>
+      <p>Темне обсмажування</p>
+      <button class="remove-btn">Видалити</button>
     </div>
+    <input class="qty" type="number" value="1" min="1">
+    <div class="price" data-price="2900">2900 грн</div>
+    <div class="item-total">2900 грн</div>
+  </div>
 
 </section>
 
 <aside class="summary-box">
-    <h2>Зведення</h2>
+  <h2>Зведення</h2>
 
-    <div class="sum-row">
-        <span>Проміжна сума</span>
-        <span id="subtotal">0 грн</span>
-    </div>
+  <div class="sum-row">
+    <span>Проміжна сума</span>
+    <span id="subtotal">0 грн</span>
+  </div>
 
-    <div class="total">
-        <span>Разом</span>
-        <span id="grand-total">0 грн</span>
-    </div>
+  <div class="sum-total">
+    <span>Разом</span>
+    <span id="grand-total">0 грн</span>
+  </div>
 
-    <button class="order-btn">Оформити замовлення</button>
+  <button class="order-btn">Оформити замовлення</button>
 </aside>
 
 </main>
 
 <footer>
-    © 2025 Coffee World Shop
+  © 2025 Coffee World Shop
 </footer>
 
 <script src="script.js"></script>
