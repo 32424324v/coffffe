@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee World Shop – Кошик</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
 <header>
   <div class="header-inner">
@@ -48,6 +56,28 @@
     <div class="item-total">2900 грн</div>
   </div>
 
+  <div class="cart-card" data-category="syrup">
+    <div class="card-info">
+      <h3>Сироп ванільний Monin</h3>
+      <p>Об'єм: 1 літр</p>
+      <button class="remove-btn">Видалити</button>
+    </div>
+    <input class="qty" type="number" value="3" min="1">
+    <div class="price" data-price="450">450 грн</div>
+    <div class="item-total">1350 грн</div>
+  </div>
+
+  <div class="cart-card" data-category="accessory">
+    <div class="card-info">
+      <h3>Френч-прес Bodum</h3>
+      <p>Ємність: 1 л</p>
+      <button class="remove-btn">Видалити</button>
+    </div>
+    <input class="qty" type="number" value="1" min="1">
+    <div class="price" data-price="1800">1800 грн</div>
+    <div class="item-total">1800 грн</div>
+  </div>
+
 </section>
 
 <aside class="summary-box">
@@ -64,12 +94,16 @@
   </div>
 
   <button class="order-btn">Оформити замовлення</button>
+  <p class="shipping-note">*Доставка розраховується при оформленні</p>
 </aside>
 
 </main>
 
 <footer>
-  © 2025 Coffee World Shop
+  <div class="footer-content">
+    <p>© 2025 Coffee World Shop. Усі права захищені.</p>
+    <p>Контакти: +380 12 345 6789 | info@coffeeworld.com</p>
+  </div>
 </footer>
 
 <script src="script.js"></script>
