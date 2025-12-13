@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const emptyCartMessage = document.createElement("div");
   emptyCartMessage.className = "empty-cart-message";
   emptyCartMessage.innerHTML = `
-    <h3>😔 Ваш кошик порожній</h3>
+    <h3> Ваш кошик порожній</h3>
     <p>Додайте товари з <a href="shop.html">магазину</a>, щоб зробити замовлення.</p>
   `;
   cartItemsContainer.appendChild(emptyCartMessage);
