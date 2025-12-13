@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoryFilter = document.getElementById("category-filter");
   const subtotalEl = document.getElementById("subtotal");
   const totalEl = document.getElementById("grand-total");
+  const orderBtn = document.querySelector(".order-btn");
 
   function updateTotals() {
     let sum = 0;
@@ -11,8 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".cart-card").forEach(card => {
       if (card.style.display === "none") return;
 
-      const qty = parseInt(card.querySelector(".qty").value);
-      const price = parseInt(card.querySelector(".price").dataset.price);
+      const qty = parseInt(card.querySelector(".qty").value) || 0;
+      const price = parseInt(card.querySelector(".price").dataset.price) || 0;
       const total = qty * price;
 
       card.querySelector(".item-total").textContent = total + " грн";
@@ -53,6 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   searchInput.addEventListener("input", applyFilters);
   categoryFilter.addEventListener("change", applyFilters);
+
+  orderBtn.addEventListener("click", () => {
+    const total = parseInt(totalEl.textContent) || 0;
+    if (total === 0) {
+      alert("Кошик порожній!");
+      return;
+    }
+    alert(`Замовлення оформлено на суму: ${total} грн. Дякуємо!`);
+  });
 
   updateTotals();
 });
