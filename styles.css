@@ -665,3 +665,151 @@ footer {
     font-size: 1.5rem;
   }
 }
+/* ============== CART COUNT BADGE ============== */
+.cart-count {
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  margin-left: 5px;
+  display: none;
+}
+
+/* ============== PRODUCT CARD BUTTON STATES ============== */
+.btn-in-cart {
+  width: 100%;
+  padding: 12px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-in-cart:hover {
+  background: #219955;
+}
+
+/* ============== EMPTY CART MESSAGE ============== */
+.empty-cart-message {
+  text-align: center;
+  padding: 50px 20px;
+  color: #7c6b60;
+  font-size: 1.1rem;
+  display: none;
+}
+
+.empty-cart-message h3 {
+  color: #4b342c;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+.empty-cart-message a {
+  color: #a87c5d;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.empty-cart-message a:hover {
+  text-decoration: underline;
+}
+
+/* ============== NOTIFICATION ============== */
+.notification {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: #2ecc71;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+/* ============== CARD ANIMATIONS ============== */
+.cart-card.removing {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-20px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.qty.updated {
+  animation: pulse 0.3s ease;
+}
+
+/* ============== PRODUCT GRID UPDATES ============== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 50px;
+}
+
+.product-card {
+  background: #faf7f5;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.product-card.in-cart::after {
+  content: '✓ В кошику';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #27ae60;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ============== RESPONSIVE UPDATES ============== */
+@media (max-width: 768px) {
+  .cart-count {
+    font-size: 0.7rem;
+    padding: 1px 6px;
+  }
+  
+  .empty-cart-message {
+    padding: 30px 15px;
+  }
+  
+  .empty-cart-message h3 {
+    font-size: 1.5rem;
+  }
+}
