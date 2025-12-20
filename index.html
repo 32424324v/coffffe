@@ -14,7 +14,7 @@
     <nav>
       <a class="active" href="index.html">Головна</a>
       <a href="shop.html">Магазин</a>
-      <a href="cart.html">Кошик</a>
+      <a href="cart.html">Кошик <span id="cart-count" class="cart-count">0</span></a>
       <a href="contact.html">Контакти</a>
     </nav>
   </div>
@@ -66,54 +66,8 @@
   <section class="popular-products">
     <div class="container">
       <h2>Популярні товари</h2>
-      <div class="products-grid">
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1587734195685-0b74c9c5c78b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Арабіка Ефіопія">
-          </div>
-          <div class="product-info">
-            <h3>Арабіка Ефіопія</h3>
-            <p>Фрутові ноти, середнє обсмажування</p>
-            <div class="product-price">1250 грн</div>
-            <button class="btn-add" onclick="addToCart('Арабіка Ефіопія', 1250)">Додати до кошика</button>
-          </div>
-        </div>
-        
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Робуста Індія">
-          </div>
-          <div class="product-info">
-            <h3>Робуста Індія</h3>
-            <p>Насичений смак, темне обсмажування</p>
-            <div class="product-price">2900 грн</div>
-            <button class="btn-add" onclick="addToCart('Робуста Індія', 2900)">Додати до кошика</button>
-          </div>
-        </div>
-        
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1570196911496-66bd58a5b7b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Сироп ванільний">
-          </div>
-          <div class="product-info">
-            <h3>Сироп ванільний</h3>
-            <p>Monin, 1 літр, для кави та коктейлів</p>
-            <div class="product-price">450 грн</div>
-            <button class="btn-add" onclick="addToCart('Сироп ванільний', 450)">Додати до кошика</button>
-          </div>
-        </div>
-        
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1524350876685-274059332603?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Френч-прес">
-          </div>
-          <div class="product-info">
-            <h3>Френч-прес Bodum</h3>
-            <p>Скляний, 1 літр, нержавіюча сталь</p>
-            <div class="product-price">1800 грн</div>
-            <button class="btn-add" onclick="addToCart('Френч-прес Bodum', 1800)">Додати до кошика</button>
-          </div>
-        </div>
+      <div class="products-grid" id="products-grid">
+        <!-- Товари будуть додані через JavaScript -->
       </div>
       <div class="text-center">
         <a href="shop.html" class="btn-secondary">Переглянути весь каталог</a>
@@ -185,7 +139,7 @@
     </div>
     <div class="footer-section">
       <h3>Контакти</h3>
-      <p>📍 Дніпро, Синельниково</p>
+      <p>📍 Київ, вул. Кавова, 15</p>
       <p>📞 +380 12 345 6789</p>
       <p>✉️ info@coffeeworld.com</p>
     </div>
@@ -208,37 +162,209 @@
   </div>
 </footer>
 
+<script src="cart-manager.js"></script>
 <script>
-  function addToCart(productName, price) {
-    alert(`Товар "${productName}" додано до кошика!\n\nЦіна: ${price} грн\n\nПерейдіть у кошик для оформлення замовлення.`);
+  // Дані товарів
+  const products = [
+    {
+      id: 1,
+      name: "Арабіка Ефіопія Іргачеффе",
+      description: "Фрутові ноти, середнє обсмажування",
+      price: 1250,
+      category: "coffee",
+      image: "https://images.unsplash.com/photo-1587734195685-0b74c9c5c78b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    },
+    {
+      id: 2,
+      name: "Робуста Індія",
+      description: "Насичений смак, темне обсмажування",
+      price: 2900,
+      category: "coffee",
+      image: "https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    },
+    {
+      id: 3,
+      name: "Сироп ванільний Monin",
+      description: "1 літр, для кави та коктейлів",
+      price: 450,
+      category: "syrup",
+      image: "https://images.unsplash.com/photo-1570196911496-66bd58a5b7b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    },
+    {
+      id: 4,
+      name: "Френч-прес Bodum",
+      description: "Скляний, 1 літр, нержавіюча сталь",
+      price: 1800,
+      category: "accessory",
+      image: "https://images.unsplash.com/photo-1524350876685-274059332603?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    },
+    {
+      id: 5,
+      name: "Кава Бразилія Сантос",
+      description: "Горіхові ноти, легке обсмажування",
+      price: 950,
+      category: "coffee",
+      image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    },
+    {
+      id: 6,
+      name: "Молоткова кавомолка",
+      description: "Електрична, 18 ступенів помелу",
+      price: 3200,
+      category: "accessory",
+      image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    }
+  ];
+
+  // Відображення товарів
+  function renderProducts() {
+    const productsGrid = document.getElementById('products-grid');
+    productsGrid.innerHTML = '';
     
-    // Зберігаємо в localStorage
-    localStorage.setItem('lastAddedProduct', JSON.stringify({
-      name: productName,
-      price: price,
-      time: new Date().toISOString()
-    }));
-  }
-  
-  // Анімація при прокрутці
-  document.addEventListener('DOMContentLoaded', function() {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-        }
-      });
-    }, observerOptions);
-    
-    // Спостерігаємо за картками
-    document.querySelectorAll('.feature-card, .product-card, .testimonial-card').forEach(card => {
-      observer.observe(card);
+    products.forEach(product => {
+      const productCard = document.createElement('div');
+      productCard.className = 'product-card';
+      productCard.dataset.id = product.id;
+      productCard.dataset.category = product.category;
+      
+      // Перевіряємо, чи товар вже в кошику
+      const cart = getCart();
+      const inCart = cart.find(item => item.id === product.id);
+      const buttonText = inCart ? 'В кошику ✓' : 'Додати до кошика';
+      const buttonClass = inCart ? 'btn-in-cart' : 'btn-add';
+      
+      productCard.innerHTML = `
+        <div class="product-image">
+          <img src="${product.image}" alt="${product.name}">
+        </div>
+        <div class="product-info">
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <div class="product-price">${product.price} грн</div>
+          <button class="${buttonClass}" onclick="addToCart(${product.id})">
+            ${buttonText}
+          </button>
+        </div>
+      `;
+      
+      productsGrid.appendChild(productCard);
     });
+  }
+
+  // Додавання товару в кошик
+  function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    const cart = getCart();
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        category: product.category,
+        quantity: 1
+      });
+    }
+    
+    saveCart(cart);
+    updateCartCount();
+    renderProducts();
+    
+    // Показуємо повідомлення
+    showNotification(`${product.name} додано до кошика!`);
+  }
+
+  // Функції для роботи з кошиком
+  function getCart() {
+    const cartJson = localStorage.getItem('coffeeShopCart');
+    return cartJson ? JSON.parse(cartJson) : [];
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem('coffeeShopCart', JSON.stringify(cart));
+  }
+
+  function updateCartCount() {
+    const cart = getCart();
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+      cartCount.textContent = totalItems;
+      cartCount.style.display = totalItems > 0 ? 'inline-block' : 'none';
+    }
+  }
+
+  function showNotification(message) {
+    // Створюємо повідомлення
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: #2ecc71;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      z-index: 10000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Видаляємо через 3 секунди
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease forwards';
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 300);
+    }, 3000);
+  }
+
+  // Додаємо анімації для повідомлень
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Ініціалізація
+  document.addEventListener('DOMContentLoaded', () => {
+    updateCartCount();
+    renderProducts();
+  });
+
+  // Анімація при прокрутці
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, observerOptions);
+  
+  // Спостерігаємо за картками
+  document.querySelectorAll('.feature-card, .product-card, .testimonial-card').forEach(card => {
+    observer.observe(card);
   });
 </script>
 </body>
