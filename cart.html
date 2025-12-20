@@ -13,7 +13,7 @@
     <nav>
       <a href="index.html">Головна</a>
       <a href="shop.html">Магазин</a>
-      <a class="active" href="cart.html">Кошик</a>
+      <a class="active" href="cart.html">Кошик <span id="cart-count" class="cart-count">0</span></a>
       <a href="contact.html">Контакти</a>
     </nav>
   </div>
@@ -34,48 +34,13 @@
     </select>
   </div>
 
-  <div class="cart-card" data-category="coffee">
-    <div class="card-info">
-      <h3>Арабіка Ефіопія Іргачеффе</h3>
-      <p>Середнє обсмажування</p>
-      <button class="remove-btn">Видалити</button>
-    </div>
-    <input class="qty" type="number" value="2" min="1">
-    <div class="price" data-price="1250">1250 грн</div>
-    <div class="item-total">2500 грн</div>
+  <div id="cart-items-container">
+    <!-- Товари будуть додані через JavaScript -->
   </div>
 
-  <div class="cart-card" data-category="coffee">
-    <div class="card-info">
-      <h3>Робуста Індія</h3>
-      <p>Темне обсмажування</p>
-      <button class="remove-btn">Видалити</button>
-    </div>
-    <input class="qty" type="number" value="1" min="1">
-    <div class="price" data-price="2900">2900 грн</div>
-    <div class="item-total">2900 грн</div>
-  </div>
-
-  <div class="cart-card" data-category="syrup">
-    <div class="card-info">
-      <h3>Сироп ванільний Monin</h3>
-      <p>Об'єм: 1 літр</p>
-      <button class="remove-btn">Видалити</button>
-    </div>
-    <input class="qty" type="number" value="3" min="1">
-    <div class="price" data-price="450">450 грн</div>
-    <div class="item-total">1350 грн</div>
-  </div>
-
-  <div class="cart-card" data-category="accessory">
-    <div class="card-info">
-      <h3>Френч-прес Bodum</h3>
-      <p>Ємність: 1 л</p>
-      <button class="remove-btn">Видалити</button>
-    </div>
-    <input class="qty" type="number" value="1" min="1">
-    <div class="price" data-price="1800">1800 грн</div>
-    <div class="item-total">1800 грн</div>
+  <div id="empty-cart-message" class="empty-cart-message" style="display: none;">
+    <h3>😔 Ваш кошик порожній</h3>
+    <p>Додайте товари з <a href="index.html">головної сторінки</a> або <a href="shop.html">магазину</a>, щоб зробити замовлення.</p>
   </div>
 
 </section>
@@ -93,7 +58,7 @@
     <span id="grand-total">0 грн</span>
   </div>
 
-  <button class="order-btn">Оформити замовлення</button>
+  <button class="order-btn" id="checkout-btn">Оформити замовлення</button>
   <p class="shipping-note">*Доставка розраховується при оформленні</p>
 </aside>
 
@@ -106,6 +71,262 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="cart-manager.js"></script>
+<script>
+  // Дані товарів (такі ж як на головній сторінці)
+  const products = [
+    {
+      id: 1,
+      name: "Арабіка Ефіопія Іргачеффе",
+      description: "Фрутові ноти, середнє обсмажування",
+      price: 1250,
+      category: "coffee"
+    },
+    {
+      id: 2,
+      name: "Робуста Індія",
+      description: "Насичений смак, темне обсмажування",
+      price: 2900,
+      category: "coffee"
+    },
+    {
+      id: 3,
+      name: "Сироп ванільний Monin",
+      description: "1 літр, для кави та коктейлів",
+      price: 450,
+      category: "syrup"
+    },
+    {
+      id: 4,
+      name: "Френч-прес Bodum",
+      description: "Скляний, 1 літр, нержавіюча сталь",
+      price: 1800,
+      category: "accessory"
+    },
+    {
+      id: 5,
+      name: "Кава Бразилія Сантос",
+      description: "Горіхові ноти, легке обсмажування",
+      price: 950,
+      category: "coffee"
+    },
+    {
+      id: 6,
+      name: "Молоткова кавомолка",
+      description: "Електрична, 18 ступенів помелу",
+      price: 3200,
+      category: "accessory"
+    }
+  ];
+
+  // Відображення товарів у кошику
+  function renderCart() {
+    const cart = getCart();
+    const container = document.getElementById('cart-items-container');
+    const emptyMessage = document.getElementById('empty-cart-message');
+    
+    if (cart.length === 0) {
+      container.innerHTML = '';
+      emptyMessage.style.display = 'block';
+      updateCartCount();
+      updateTotals();
+      return;
+    }
+    
+    emptyMessage.style.display = 'none';
+    container.innerHTML = '';
+    
+    cart.forEach(item => {
+      const product = products.find(p => p.id === item.id);
+      if (!product) return;
+      
+      const cartCard = document.createElement('div');
+      cartCard.className = 'cart-card';
+      cartCard.dataset.category = product.category;
+      cartCard.dataset.id = item.id;
+      
+      const totalPrice = item.quantity * product.price;
+      
+      cartCard.innerHTML = `
+        <div class="card-info">
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <button class="remove-btn" onclick="removeFromCart(${item.id})">Видалити</button>
+        </div>
+        <input class="qty" type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)">
+        <div class="price" data-price="${product.price}">${product.price} грн</div>
+        <div class="item-total">${totalPrice} грн</div>
+      `;
+      
+      container.appendChild(cartCard);
+    });
+    
+    updateCartCount();
+    updateTotals();
+  }
+
+  // Оновлення кількості товару
+  function updateQuantity(productId, newQuantity) {
+    const cart = getCart();
+    const item = cart.find(item => item.id === productId);
+    
+    if (item) {
+      newQuantity = parseInt(newQuantity);
+      if (isNaN(newQuantity) || newQuantity < 1) newQuantity = 1;
+      if (newQuantity > 99) newQuantity = 99;
+      
+      item.quantity = newQuantity;
+      saveCart(cart);
+      renderCart();
+    }
+  }
+
+  // Видалення товару з кошика
+  function removeFromCart(productId) {
+    if (!confirm('Видалити цей товар з кошика?')) return;
+    
+    const cart = getCart();
+    const updatedCart = cart.filter(item => item.id !== productId);
+    saveCart(updatedCart);
+    renderCart();
+    
+    // Показуємо повідомлення
+    showNotification('Товар видалено з кошика');
+  }
+
+  // Оновлення загальної суми
+  function updateTotals() {
+    const cart = getCart();
+    let subtotal = 0;
+    
+    cart.forEach(item => {
+      const product = products.find(p => p.id === item.id);
+      if (product) {
+        subtotal += item.quantity * product.price;
+      }
+    });
+    
+    document.getElementById('subtotal').textContent = `${subtotal} грн`;
+    document.getElementById('grand-total').textContent = `${subtotal} грн`;
+  }
+
+  // Фільтрація товарів
+  function applyFilters() {
+    const text = document.getElementById('search-input').value.toLowerCase();
+    const category = document.getElementById('category-filter').value;
+    
+    document.querySelectorAll('.cart-card').forEach(card => {
+      const name = card.querySelector('h3').textContent.toLowerCase();
+      const matchText = name.includes(text);
+      const matchCat = category === 'all' || card.dataset.category === category;
+      
+      card.style.display = matchText && matchCat ? 'grid' : 'none';
+    });
+    
+    // Перевіряємо, чи є видимі товари
+    const visibleCards = document.querySelectorAll('.cart-card[style*="grid"]').length;
+    const emptyMessage = document.getElementById('empty-cart-message');
+    const container = document.getElementById('cart-items-container');
+    
+    if (visibleCards === 0 && container.children.length > 0) {
+      emptyMessage.style.display = 'block';
+    } else if (visibleCards > 0) {
+      emptyMessage.style.display = 'none';
+    }
+  }
+
+  // Оформлення замовлення
+  document.getElementById('checkout-btn').addEventListener('click', () => {
+    const cart = getCart();
+    if (cart.length === 0) {
+      alert('Кошик порожній! Додайте товари перед оформленням замовлення.');
+      return;
+    }
+    
+    const total = cart.reduce((sum, item) => {
+      const product = products.find(p => p.id === item.id);
+      return sum + (product ? item.quantity * product.price : 0);
+    }, 0);
+    
+    if (confirm(`Оформити замовлення на суму ${total} грн?`)) {
+      // Симуляція оформлення
+      alert('✅ Замовлення успішно оформлено! Дякуємо за покупку!');
+      
+      // Очищення кошика після замовлення
+      localStorage.removeItem('coffeeShopCart');
+      renderCart();
+    }
+  });
+
+  // Ініціалізація
+  document.addEventListener('DOMContentLoaded', () => {
+    renderCart();
+    
+    // Підписка на події фільтрів
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+    document.getElementById('category-filter').addEventListener('change', applyFilters);
+  });
+
+  // Функції для роботи з кошиком
+  function getCart() {
+    const cartJson = localStorage.getItem('coffeeShopCart');
+    return cartJson ? JSON.parse(cartJson) : [];
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem('coffeeShopCart', JSON.stringify(cart));
+  }
+
+  function updateCartCount() {
+    const cart = getCart();
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+      cartCount.textContent = totalItems;
+      cartCount.style.display = totalItems > 0 ? 'inline-block' : 'none';
+    }
+  }
+
+  function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: #e74c3c;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      z-index: 10000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease forwards';
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 300);
+    }, 3000);
+  }
+
+  // Додаємо анімації для повідомлень
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
 </body>
 </html>
